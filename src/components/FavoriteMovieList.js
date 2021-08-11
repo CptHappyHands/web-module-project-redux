@@ -1,14 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
-
+import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { removeFavorites } from "../actions/favoritesActions";
 
 const FavoriteMovieList = (props) => {
   const favorites = props.favorites;
-
-  const handleRemoveFavorites = () => {
-    props.removeFavorites();
+  const { push } = useHistory();
+  const handleRemoveFavorites = (id) => {
+    props.removeFavorites(id);
+    push("/movies");
   };
 
   return (
@@ -24,8 +25,8 @@ const FavoriteMovieList = (props) => {
               {movie.title}
               <span>
                 <span
-                  onClick={() => handleRemoveFavorites()}
-                  class="material-icons"
+                  onClick={() => handleRemoveFavorites(movie.id)}
+                  className="material-icons"
                 >
                   remove_circle
                 </span>
