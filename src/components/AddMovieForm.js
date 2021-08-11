@@ -16,10 +16,10 @@ const AddMovieForm = (props) => {
     description: "",
   });
 
-  const handleAddMovie = (movie) => {
-    props.addMovie(movie);
-    push("/movies/");
-  };
+  //   const handleAddMovie = (movie) => {
+  //     props.addMovie(movie);
+  //     push("/movies/");
+  //   };
 
   const handleChange = (e) => {
     setMovie({
@@ -28,7 +28,11 @@ const AddMovieForm = (props) => {
     });
   };
 
-  const handleSubmit = (e) => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    props.addMovie(movie);
+    push("/movies/");
+  };
 
   const { title, director, genre, metascore, description } = movie;
   return (
@@ -93,7 +97,7 @@ const AddMovieForm = (props) => {
             </div>
             <div className="modal-footer">
               <input
-                onClick={() => handleAddMovie(movie.id)}
+                // onClick={handleSubmit}
                 type="submit"
                 className="btn btn-success"
                 value="Add"
@@ -115,7 +119,7 @@ const AddMovieForm = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    movies: state.movies,
+    movies: state.movieReducer.movies,
   };
 };
 
